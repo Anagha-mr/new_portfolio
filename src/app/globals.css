@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   THE RED THREAD — design tokens
+   Single source of truth for colour, type, motion. No raw hex outside here.
+   ========================================================================== */
+
+@theme {
+  /* colour */
+  --color-void: #080807;
+  --color-ivory: #f1ede5;
+  --color-cherry: #c1121f;
+  --color-deep-cherry: #850e17;
+  --color-charcoal: #181715;
+  --color-stone: #817b73;
+  --color-silver: #b5b1aa;
+
+  /* type */
+  --font-display: var(--font-instrument-serif), "Times New Roman", serif;
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", monospace;
+
+  /* motion */
+  --ease-editorial: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-thread: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* layout */
+  --breakpoint-xs: 30rem;
+}
+
+:root {
+  --duration-fast: 200ms;
+  --duration-base: 500ms;
+  --duration-slow: 900ms;
+  --container-max: 90rem;
+  --gutter: clamp(1.25rem, 4vw, 4rem);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-stone);
+  }
+
+  html {
+    background: var(--color-void);
+    color-scheme: dark;
+  }
+
+  body {
+    background: var(--color-void);
+    color: var(--color-ivory);
+    font-family: var(--font-sans);
+  }
+
+  ::selection {
+    background: var(--color-cherry);
+    color: var(--color-ivory);
+  }
+
+  :focus-visible {
+    outline: 1px solid var(--color-cherry);
+    outline-offset: 3px;
+  }
+}
+
+@layer utilities {
+  .container-editorial {
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  .thread-underline {
+    background-image: linear-gradient(var(--color-cherry), var(--color-cherry));
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size var(--duration-base) var(--ease-editorial);
+  }
+
+  .thread-underline:hover,
+  .thread-underline:focus-visible {
+    background-size: 100% 1px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
