@@ -9,11 +9,22 @@ export function Navigation() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [lastPathname, setLastPathname] = useState(pathname);
+  const [scrolled, setScrolled] = useState(false);
+  const onProject = pathname.startsWith("/work/");
 
   if (pathname !== lastPathname) {
     setLastPathname(pathname);
     setOpen(false);
+    setScrolled(false);
   }
+
+  // Project pages have ivory bands; the bar gets a backing once content scrolls under it.
+  useEffect(() => {
+    if (!onProject) return;
+    const handleScroll = () => setScrolled(window.scrollY > 80);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [onProject]);
 
   useEffect(() => {
     if (!open) return;
@@ -25,7 +36,11 @@ export function Navigation() {
   }, [open]);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-40">
+    <header
+      className={`fixed inset-x-0 top-0 z-40 transition-colors duration-[var(--duration-base)] ${
+        onProject && scrolled ? "bg-void/90 backdrop-blur-sm" : ""
+      }`}
+    >
       <div className="container-editorial flex items-center justify-between py-6">
         <Link
           href="/"

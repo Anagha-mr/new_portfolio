@@ -9,17 +9,12 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
 export type SpatialSceneProps = {
   children: ReactNode;
   className?: string;
+  /** Stops the render loop, e.g. while the scene is off-screen. */
+  paused?: boolean;
 };
 
-/**
- * Reusable spatial engine container. Owns the Canvas, device-aware pixel
- * ratio and shadow quality, atmospheric fog, and the pointer-damping
- * provider — everything a scene needs regardless of what's inside it.
- * Individual scenes (HeroScene today; WorkScene/ProjectScene later) supply
- * their own camera, lighting, objects and filament as children, so this
- * component never hardcodes a specific composition.
- */
-export function SpatialScene({ children, className }: SpatialSceneProps) {
+/** Canvas, quality-aware settings, fog and pointer provider shared by every scene. */
+export function SpatialScene({ children, className, paused = false }: SpatialSceneProps) {
   const quality = useQualityTier();
   const reducedMotion = useReducedMotion();
 
@@ -27,6 +22,7 @@ export function SpatialScene({ children, className }: SpatialSceneProps) {
     <Canvas
       dpr={quality.dpr}
       shadows="variance"
+      frameloop={paused ? "never" : "always"}
       gl={{ antialias: true, alpha: true }}
       style={{ pointerEvents: "none" }}
       className={className}

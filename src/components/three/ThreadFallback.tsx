@@ -3,11 +3,7 @@
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useWebGLSupport } from "@/hooks/useWebGLSupport";
 
-/**
- * The 2D form of the thread motif — visible only when the 3D filament
- * isn't rendering (no WebGL, or reduced motion). Mirrors `WebGLCanvas`'s
- * own check so the two layers are never both drawn at once.
- */
+/** 2D thread shown only when the 3D filament isn't (mirrors `WebGLCanvas`'s check). */
 export function ThreadFallback() {
   const reducedMotion = useReducedMotion();
   const supported = useWebGLSupport();

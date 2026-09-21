@@ -1,12 +1,6 @@
 import * as THREE from "three";
 
-/**
- * Reusable material language for the spatial engine. Each factory returns a
- * fresh MeshStandardMaterial instance — callers own disposal (typically via
- * `useMemo` + an unmount effect) since materials aren't shared across
- * meshes here. Kept deliberately small: lighting, not material trickery,
- * is meant to carry most of the visual weight.
- */
+// Each factory returns a fresh material; callers own disposal.
 
 const CHARCOAL = "#181715";
 const STONE = "#817b73";

@@ -3,11 +3,7 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
 
-/**
- * Minimal mount-fade, retriggered per route. Placeholder for GSAP-driven
- * transitions in a later sprint — kept as a single wrapper so swapping the
- * implementation later doesn't touch any page.
- */
+/** Mount fade retriggered on every route change. */
 export function PageTransition({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const [trackedPath, setTrackedPath] = useState(pathname);

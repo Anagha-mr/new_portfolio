@@ -2,6 +2,7 @@ import { site } from "@/data/site";
 import { Container } from "@/components/layout/Container";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Button } from "@/components/ui/Button";
+import { ThreadLayer } from "@/thread/ThreadLayer";
 
 export function ContactSection() {
   return (
@@ -9,7 +10,10 @@ export function ContactSection() {
       <Container>
         <SectionLabel index="04" title="Contact" />
 
-        <div className="mt-12 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+        <ThreadLayer
+          preset="contact"
+          className="mt-12 flex flex-col gap-8 md:flex-row md:items-end md:justify-between"
+        >
           <p className="max-w-xl font-display text-3xl text-ivory md:text-4xl">
             {site.email ? (
               <a href={`mailto:${site.email}`} className="thread-underline">
@@ -21,7 +25,7 @@ export function ContactSection() {
           </p>
 
           <Button href="/contact">Contact →</Button>
-        </div>
+        </ThreadLayer>
 
         {site.socials.length > 0 && (
           <ul className="mt-10 flex flex-wrap gap-6 font-mono text-xs uppercase tracking-[0.15em] text-stone">

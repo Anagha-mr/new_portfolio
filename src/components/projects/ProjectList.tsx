@@ -5,7 +5,6 @@ type ProjectListProps = {
   projects: Project[];
 };
 
-/** Editorial project index — deliberately not a card grid. */
 export function ProjectList({ projects }: ProjectListProps) {
   return (
     <ul className="border-t border-stone/30">

@@ -1,20 +1,13 @@
 import * as THREE from "three";
 
 export type ThreadPathConfig = {
-  /** Number of control points generated along the path. */
   segments?: number;
-  /** Radius of the orbit in scene units. */
+  /** Orbit radius in scene units. */
   radius?: number;
-  /** Vertical drift applied across the path. */
+  /** Vertical drift across the path. */
   rise?: number;
 };
 
-/**
- * Generates the control points for a single orbital filament.
- * This is a first-pass placeholder — Sprint 04 replaces the curve math
- * with cursor/scroll-driven paths, but the shape stays a Catmull-Rom curve
- * so `RedThread` doesn't need to change.
- */
 export function generateOrbitalPath({
   segments = 48,
   radius = 3,
@@ -37,13 +30,7 @@ export function createThreadCurve(points: THREE.Vector3[]): THREE.CatmullRomCurv
   return new THREE.CatmullRomCurve3(points, true, "catmullrom", 0.2);
 }
 
-/**
- * Displaces each control point by a small amount using combined sine waves
- * at per-point phases/frequencies (derived from the point's index) so the
- * curve reads as organically drifting rather than uniformly pulsing. Pure
- * function — callers decide how often to call it (Sprint 04 throttles this
- * to a few times per second rather than every frame).
- */
+// Index-derived phases keep the curve wandering instead of pulsing uniformly.
 export function applyOrganicDrift(
   points: THREE.Vector3[],
   time: number,

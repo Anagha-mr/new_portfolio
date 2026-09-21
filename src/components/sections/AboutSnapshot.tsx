@@ -3,6 +3,7 @@ import { Container } from "@/components/layout/Container";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Metadata } from "@/components/ui/Metadata";
 import { Button } from "@/components/ui/Button";
+import { ThreadLayer } from "@/thread/ThreadLayer";
 
 export function AboutSnapshot() {
   return (
@@ -10,7 +11,7 @@ export function AboutSnapshot() {
       <Container>
         <SectionLabel index="03" title="About" />
 
-        <div className="mt-12 grid grid-cols-1 gap-10 md:grid-cols-12">
+        <ThreadLayer preset="about" className="mt-12 grid grid-cols-1 gap-10 md:grid-cols-12">
           <div className="md:col-span-8">
             <p className="max-w-2xl font-display text-2xl leading-snug text-ivory md:text-3xl">
               Computer Science undergraduate focused on AI/ML, computer vision,
@@ -36,7 +37,7 @@ export function AboutSnapshot() {
               More about me →
             </Button>
           </div>
-        </div>
+        </ThreadLayer>
       </Container>
     </section>
   );

@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Anagha MR — The Red Thread
 
-## Getting Started
+Personal portfolio of Anagha MR: a dark editorial site with a spatial WebGL hero and a red filament that runs through the pages.
 
-First, run the development server:
+## Stack
+
+- Next.js (App Router), React, TypeScript
+- Tailwind CSS
+- Three.js, React Three Fiber, `@react-three/drei`
+- GSAP and Lenis for scroll and motion
+
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The site runs at [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command         | Description                   |
+| --------------- | ----------------------------- |
+| `npm run dev`   | Start the development server  |
+| `npm run build` | Create a production build     |
+| `npm run start` | Serve the production build    |
+| `npm run lint`  | Run ESLint                    |
 
-## Learn More
+## Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+  app/          Routes and global styles
+  components/   Layout, navigation, sections, UI primitives
+  data/         Site, project (one file per project), experience, education and skills content
+  hooks/        Shared client hooks
+  thread/       Page-level thread layers and scroll hand-off from the hero
+  three/        WebGL scenes, objects, materials and the 3D thread
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Content lives in `src/data`, separate from the components that render it.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Projects
 
-## Deploy on Vercel
+Each project with a page is a file in `src/data/projects/` (index fields plus a `detail` block). `/work/[slug]` renders the shared page structure in `src/components/projects/page/`; each project's `detail.visual` selects its hero and system diagram from `src/components/projects/worlds/`. Adding a project means adding a data file and, if it needs a new visual language, a world component.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Notes
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- The 3D layer is an enhancement: the site remains fully usable without WebGL.
+- `prefers-reduced-motion` is respected throughout.

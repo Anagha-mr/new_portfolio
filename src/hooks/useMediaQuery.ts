@@ -2,7 +2,7 @@
 
 import { useCallback, useSyncExternalStore } from "react";
 
-/** SSR-safe media query subscription — avoids the effect/hydration dance entirely. */
+/** SSR-safe media query subscription; reports `false` on the server. */
 export function useMediaQuery(query: string): boolean {
   const subscribe = useCallback(
     (callback: () => void) => {

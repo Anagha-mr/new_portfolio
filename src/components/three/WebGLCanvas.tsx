@@ -10,12 +10,9 @@ export type WebGLCanvasProps = {
 };
 
 /**
- * The only bridge between React UI and the Three.js layer. Renders nothing
- * (letting the CSS fallback show through) when WebGL is unavailable or the
- * user prefers reduced motion — the 3D layer is enhancement, never load-bearing.
- *
- * Callers own their own `next/dynamic` import (see `HeroCanvas`) so this
- * component never constructs one during render.
+ * Bridge between React UI and the Three.js layer. Renders nothing when WebGL
+ * is unavailable or motion is reduced, letting the CSS fallback show through.
+ * Callers own their `next/dynamic` import so none is created during render.
  */
 export function WebGLCanvas({ children, className }: WebGLCanvasProps) {
   const reducedMotion = useReducedMotion();

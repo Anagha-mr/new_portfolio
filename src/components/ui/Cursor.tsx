@@ -4,10 +4,7 @@ import { useEffect, useRef } from "react";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
-/**
- * A small cherry-dot cursor accent. Purely decorative, never load-bearing —
- * skipped on touch/coarse pointers and under reduced motion.
- */
+/** Decorative cherry dot; skipped on coarse pointers and under reduced motion. */
 export function Cursor() {
   const dotRef = useRef<HTMLDivElement>(null);
   const reducedMotion = useReducedMotion();

@@ -7,29 +7,30 @@ import type { Mesh } from "three";
 import { createCharcoalMaterial } from "../materials/surfaceMaterials";
 import { createSeededRandom } from "../utils/random";
 import { usePointer } from "../hooks/usePointer";
+import { clamp01, type EntranceRef } from "../hooks/useEntrance";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 export type PrimaryMassProps = {
   radius?: number;
   position?: [number, number, number];
-  /** Icosahedron subdivision — lower reads as more faceted. From useQualityTier. */
+  /** Icosahedron subdivision; lower reads as more faceted. */
   detail?: number;
-  /** Enables the tiny pointer-driven positional drift. */
   pointerInteraction?: boolean;
+  entrance?: EntranceRef;
 };
 
-/**
- * The portfolio's large abstract spatial object: a physical artifact
- * suspended in space, not a literal planet/moon. Built from a jittered
- * icosahedron so the surface reads as irregular rather than a smooth,
- * generic sphere — the jitter is deterministic (seeded) so it's stable
- * across re-renders instead of reshuffling on every remount.
- */
+const ENTRANCE_SCALE_START = 0.92;
+/** Fraction of the entrance timeline by which the mass has fully resolved. */
+const ENTRANCE_WINDOW = 0.55;
+
+// Jittered icosahedron so the surface reads irregular; the jitter is seeded
+// so it stays stable across remounts.
 export function PrimaryMass({
   radius = 1.6,
   position = [0, 0, 0],
   detail = 2,
   pointerInteraction = true,
+  entrance,
 }: PrimaryMassProps) {
   const meshRef = useRef<Mesh>(null);
   const pointer = usePointer();
@@ -64,6 +65,11 @@ export function PrimaryMass({
 
   useFrame((_, delta) => {
     if (!meshRef.current) return;
+
+    if (entrance) {
+      const local = clamp01(entrance.current / ENTRANCE_WINDOW);
+      meshRef.current.scale.setScalar(ENTRANCE_SCALE_START + local * (1 - ENTRANCE_SCALE_START));
+    }
 
     if (!reducedMotion) {
       meshRef.current.rotation.y += delta * 0.02;

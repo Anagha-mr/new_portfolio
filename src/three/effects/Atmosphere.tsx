@@ -10,11 +10,7 @@ export type AtmosphereProps = {
   count: number;
 };
 
-/**
- * Extremely restrained particle field — not a starfield. Count is driven
- * by the active quality tier (see `useQualityTier`) and can be zero on
- * low-tier devices, in which case this renders nothing.
- */
+/** Sparse particle field; count comes from the quality tier and may be zero. */
 export function Atmosphere({ count }: AtmosphereProps) {
   const groupRef = useRef<Group>(null);
   const reducedMotion = useReducedMotion();

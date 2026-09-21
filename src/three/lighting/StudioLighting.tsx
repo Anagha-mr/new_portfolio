@@ -1,11 +1,6 @@
 "use client";
 
-/**
- * Dark-room / gallery lighting: one controlled key light, a very low
- * ambient fill so nothing goes fully black, and a faint cherry bounce for
- * material definition. Deliberately no rim light or bloom — those read as
- * "gaming," not "editorial."
- */
+// One key light, low ambient fill and a faint cherry bounce. No rim light or bloom.
 export function StudioLighting() {
   return (
     <>

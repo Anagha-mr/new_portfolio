@@ -6,18 +6,16 @@ import { StudioLighting } from "../lighting/StudioLighting";
 import { Atmosphere } from "../effects/Atmosphere";
 import { PrimaryMass } from "../objects/PrimaryMass";
 import { ThreadController } from "../thread/ThreadController";
-import { useQualityTier } from "../hooks/useQualityTier";
+import { useQualityTier, type QualityConfig } from "../hooks/useQualityTier";
+import { useEntrance } from "../hooks/useEntrance";
+import { heroExit } from "@/thread/heroExit";
 
-/**
- * Concrete hero composition built on the reusable spatial engine. Sprint 05
- * composes the final cinematic hero using the same primitives — this stays
- * the deliberately quiet, non-choreographed baseline.
- */
-export default function HeroScene() {
-  const quality = useQualityTier();
+// Split out because `useEntrance` calls `useFrame`, which only works inside <Canvas>.
+function HeroComposition({ quality }: { quality: QualityConfig }) {
+  const entrance = useEntrance();
 
   return (
-    <SpatialScene>
+    <>
       <CameraRig pointerInteraction={quality.pointerInteraction} />
       <StudioLighting />
       <Atmosphere count={quality.particleCount} />
@@ -26,6 +24,7 @@ export default function HeroScene() {
         position={[2.4, 0.6, -2]}
         detail={quality.massDetail}
         pointerInteraction={quality.pointerInteraction}
+        entrance={entrance}
       />
       <ThreadController
         radius={3.2}
@@ -34,7 +33,19 @@ export default function HeroScene() {
         tubeSegments={quality.threadSegments}
         radialSegments={quality.threadRadialSegments}
         pointerInteraction={quality.pointerInteraction}
+        entrance={entrance}
+        exit={heroExit}
       />
+    </>
+  );
+}
+
+export default function HeroScene() {
+  const quality = useQualityTier();
+
+  return (
+    <SpatialScene>
+      <HeroComposition quality={quality} />
     </SpatialScene>
   );
 }

@@ -9,17 +9,10 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 export type CameraRigProps = {
-  /** Tiny pointer-driven camera drift — off under reduced motion regardless. */
   pointerInteraction?: boolean;
 };
 
-/**
- * Reusable camera for the spatial engine. Framing (position/fov) adapts
- * across breakpoints so the composition survives viewport changes rather
- * than the desktop scene simply being scaled down. Pointer drift is
- * damped and tiny — an environment reacting, not a camera chasing the
- * cursor. Sprint 05 owns any scroll-driven choreography on top of this.
- */
+// Framing adapts per breakpoint rather than scaling the desktop composition down.
 export function CameraRig({ pointerInteraction = true }: CameraRigProps) {
   const cameraRef = useRef<ThreePerspectiveCamera>(null);
   const pointer = usePointer();

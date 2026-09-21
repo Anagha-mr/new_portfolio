@@ -8,19 +8,12 @@ const PointerContext = createContext<{ current: Vector2 } | null>(null);
 
 export type PointerProviderProps = {
   children: ReactNode;
-  /** Disabled under prefers-reduced-motion or on low-tier devices — the
-   * damped vector simply stays at rest so consumers read zero offset. */
+  /** When disabled the damped vector stays at rest. */
   enabled?: boolean;
 };
 
-/**
- * Tracks normalized pointer position across the whole window (the canvas
- * itself is `pointer-events: none` so it never intercepts clicks/text
- * selection) and damps it toward a smoothed value once per frame. Exposed
- * as a ref via context — not React state — so pointer movement never
- * triggers a re-render; consumers read `.current` inside their own
- * `useFrame`.
- */
+// Listens on window because the canvas is pointer-events: none. The damped
+// value lives in a ref, not state, so pointer movement never re-renders.
 export function PointerProvider({ children, enabled = true }: PointerProviderProps) {
   const target = useRef(new Vector2(0, 0));
   const damped = useRef(new Vector2(0, 0));
@@ -47,7 +40,7 @@ export function PointerProvider({ children, enabled = true }: PointerProviderPro
   return <PointerContext.Provider value={damped}>{children}</PointerContext.Provider>;
 }
 
-/** Returns the damped pointer position (-1..1 on each axis) as a live ref. */
+/** Damped pointer position (-1..1 per axis) as a live ref. */
 export function usePointer(): { current: Vector2 } {
   const ctx = useContext(PointerContext);
   if (!ctx) throw new Error("usePointer must be used within a PointerProvider");

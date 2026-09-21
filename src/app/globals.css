@@ -1,9 +1,6 @@
 @import "tailwindcss";
 
-/* ==========================================================================
-   THE RED THREAD — design tokens
-   Single source of truth for colour, type, motion. No raw hex outside here.
-   ========================================================================== */
+/* Design tokens */
 
 @theme {
   /* colour */
@@ -81,6 +78,81 @@
   .thread-underline:hover,
   .thread-underline:focus-visible {
     background-size: 100% 1px;
+  }
+
+  .fade-in {
+    animation: fade-in 1.4s var(--ease-editorial) both;
+  }
+
+  .frame-scan {
+    animation: frame-scan 7s linear infinite;
+  }
+
+  .signal-x {
+    animation: signal-x 7s linear infinite;
+  }
+
+  .signal-y {
+    animation: signal-y 7s linear infinite;
+  }
+
+  .scroll-line-pulse {
+    transform-origin: top;
+    animation: scroll-pulse 2.4s var(--ease-editorial) infinite;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes frame-scan {
+  from {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  15%,
+  85% {
+    opacity: 1;
+  }
+  to {
+    transform: translateY(10rem);
+    opacity: 0;
+  }
+}
+
+@keyframes signal-x {
+  from {
+    left: 0;
+  }
+  to {
+    left: calc(100% - 5px);
+  }
+}
+
+@keyframes signal-y {
+  from {
+    top: 0;
+  }
+  to {
+    top: calc(100% - 5px);
+  }
+}
+
+@keyframes scroll-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scaleY(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleY(1);
   }
 }
 

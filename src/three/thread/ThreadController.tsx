@@ -7,28 +7,24 @@ import { RedThread, type RedThreadProps } from "./RedThread";
 import { generateOrbitalPath, applyOrganicDrift } from "./ThreadPath";
 import { usePointer } from "../hooks/usePointer";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { HERO_EXIT, heroExitDrift } from "@/thread/heroExit";
 
 export type ThreadControllerProps = RedThreadProps & {
   /** Tiny pointer-driven tension on the whole filament group. */
   pointerInteraction?: boolean;
 };
 
-/** Seconds between control-point drift updates — deliberately slow, not per-frame. */
+/** Seconds between control-point drift updates (throttled, not per-frame). */
 const DRIFT_INTERVAL = 0.35;
 
-/**
- * Composition point for the thread's behaviour: holds the base control
- * points, nudges them with a slow organic drift on a throttled interval
- * (real curve deformation, not just a transform trick), and applies a tiny
- * pointer-driven tension to the group. `RedThread` itself stays a dumb
- * geometry renderer.
- */
 export function ThreadController({
   points: explicitPoints,
   segments,
   radius,
   rise,
   pointerInteraction = true,
+  entrance,
+  exit,
   ...rest
 }: ThreadControllerProps) {
   const groupRef = useRef<Group>(null);
@@ -44,7 +40,10 @@ export function ThreadController({
   const [drivenPoints, setDrivenPoints] = useState(basePoints);
 
   useFrame((state, delta) => {
-    if (!reducedMotion) {
+    // Drift and pointer tension wait until the entrance has resolved.
+    const settled = !entrance || entrance.current >= 1;
+
+    if (!reducedMotion && settled) {
       elapsed.current += delta;
       if (elapsed.current >= DRIFT_INTERVAL) {
         elapsed.current = 0;
@@ -52,7 +51,12 @@ export function ThreadController({
       }
     }
 
-    if (!groupRef.current || reducedMotion || !pointerInteraction) return;
+    if (groupRef.current && exit) {
+      const drift = heroExitDrift(exit.current);
+      groupRef.current.position.set(HERO_EXIT.driftX * drift, HERO_EXIT.driftY * drift, 0);
+    }
+
+    if (!groupRef.current || reducedMotion || !pointerInteraction || !settled) return;
 
     groupRef.current.rotation.y = pointer.current.x * 0.05;
     groupRef.current.rotation.x = pointer.current.y * 0.03;
@@ -60,7 +64,12 @@ export function ThreadController({
 
   return (
     <group ref={groupRef}>
-      <RedThread {...rest} points={reducedMotion ? basePoints : drivenPoints} />
+      <RedThread
+        {...rest}
+        points={reducedMotion ? basePoints : drivenPoints}
+        entrance={entrance}
+        exit={exit}
+      />
     </group>
   );
 }

@@ -8,7 +8,6 @@ type MetadataProps = {
   className?: string;
 };
 
-/** Small technical/meta readout — years, categories, stack — in Geist Mono. */
 export function Metadata({ items, className = "" }: MetadataProps) {
   return (
     <dl className={`flex flex-wrap gap-x-6 gap-y-1 font-mono text-xs uppercase tracking-[0.1em] text-stone ${className}`}>
