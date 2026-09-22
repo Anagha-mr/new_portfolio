@@ -80,6 +80,17 @@
     background-size: 100% 1px;
   }
 
+  [data-fade="pending"] {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+
+  [data-fade="done"] {
+    transition:
+      opacity var(--duration-slow) var(--ease-editorial),
+      transform var(--duration-slow) var(--ease-editorial);
+  }
+
   .fade-in {
     animation: fade-in 1.4s var(--ease-editorial) both;
   }

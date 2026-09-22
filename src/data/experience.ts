@@ -4,6 +4,10 @@ export type Experience = {
   period: string;
   summary: string;
   highlights: string[];
+  /** Condensed account for the About page. */
+  overview?: string;
+  /** Slug of the related project page. */
+  project?: string;
 };
 
 export const experience: Experience[] = [
@@ -18,5 +22,8 @@ export const experience: Experience[] = [
       "Live stream latency reduced from ~45s to ~3s via an FFmpeg + HLS pipeline",
       "Hardware/software integration across NVRs, access controllers, and sensors",
     ],
+    overview:
+      "Frontend and backend for a unified enterprise security platform: React and TypeScript, FastAPI, and eight integrated modules. Includes live camera streaming with FFmpeg and HLS, RTSP handling, and integration with NVRs, access controllers and sensors.",
+    project: "gttc",
   },
 ];

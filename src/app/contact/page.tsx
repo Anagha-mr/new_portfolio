@@ -7,35 +7,60 @@ export const metadata: Metadata = {
   description: "Get in touch with Anagha MR.",
 };
 
+const displayHref = (href: string) => href.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
+
+const rowClass =
+  "flex flex-col gap-1 border-t border-stone/30 py-5 sm:flex-row sm:items-baseline sm:gap-8";
+const labelClass = "font-mono text-xs uppercase tracking-[0.2em] text-stone sm:w-32 sm:shrink-0";
+const linkClass = "group thread-underline w-fit break-words text-lg text-ivory";
+
 export default function ContactPage() {
+  const channels = [
+    ...(site.email
+      ? [{ label: "Email", href: `mailto:${site.email}`, text: site.email, external: false }]
+      : []),
+    ...site.socials.map((social) => ({
+      label: social.label,
+      href: social.href,
+      text: displayHref(social.href),
+      external: true,
+    })),
+  ];
+
   return (
-    <div className="flex min-h-[70vh] flex-col justify-center pt-32 pb-24 md:pt-40 md:pb-32">
-      <Container>
-        <h1 className="font-display text-6xl text-ivory md:text-8xl">Contact</h1>
+    <div className="flex min-h-[calc(100svh-8rem)] flex-col justify-center pt-32 pb-24 md:pt-40 md:pb-32">
+      <Container className="w-full">
+        <h1 className="font-display text-5xl leading-none text-ivory sm:text-6xl md:text-8xl">
+          Get in touch.
+        </h1>
 
-        {site.email ? (
-          <a
-            href={`mailto:${site.email}`}
-            className="thread-underline mt-10 inline-block font-display text-3xl text-ivory md:text-4xl"
-          >
-            {site.email}
-          </a>
-        ) : (
-          <p className="mt-10 max-w-md font-mono text-sm uppercase tracking-[0.15em] text-stone">
-            Contact details coming soon.
-          </p>
-        )}
-
-        {site.socials.length > 0 && (
-          <ul className="mt-12 flex flex-wrap gap-6 font-mono text-xs uppercase tracking-[0.15em] text-stone">
-            {site.socials.map((social) => (
-              <li key={social.href}>
-                <a href={social.href} className="thread-underline hover:text-ivory">
-                  {social.label}
+        {channels.length > 0 ? (
+          <ul className="mt-16 max-w-3xl md:mt-24">
+            {channels.map((channel) => (
+              <li key={channel.href} className={rowClass}>
+                <span className={labelClass}>{channel.label}</span>
+                <a
+                  href={channel.href}
+                  className={linkClass}
+                  {...(channel.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                >
+                  {channel.text}
+                  {channel.external && (
+                    <span
+                      aria-hidden="true"
+                      className="ml-2 text-stone transition-colors duration-[var(--duration-fast)] group-hover:text-cherry group-focus-visible:text-cherry"
+                    >
+                      ↗
+                    </span>
+                  )}
                 </a>
               </li>
             ))}
           </ul>
+        ) : (
+          <p className="mt-16 font-mono text-xs uppercase tracking-[0.2em] text-stone md:mt-24">
+            Contact details to be added.
+          </p>
         )}
       </Container>
     </div>

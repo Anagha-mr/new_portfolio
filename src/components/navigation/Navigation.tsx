@@ -10,7 +10,8 @@ export function Navigation() {
   const [open, setOpen] = useState(false);
   const [lastPathname, setLastPathname] = useState(pathname);
   const [scrolled, setScrolled] = useState(false);
-  const onProject = pathname.startsWith("/work/");
+  const backed = pathname !== "/";
+  const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
   if (pathname !== lastPathname) {
     setLastPathname(pathname);
@@ -18,13 +19,13 @@ export function Navigation() {
     setScrolled(false);
   }
 
-  // Project pages have ivory bands; the bar gets a backing once content scrolls under it.
+  // Inner pages scroll content under the bar; it gets a backing once they do.
   useEffect(() => {
-    if (!onProject) return;
+    if (!backed) return;
     const handleScroll = () => setScrolled(window.scrollY > 80);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [onProject]);
+  }, [backed]);
 
   useEffect(() => {
     if (!open) return;
@@ -38,7 +39,7 @@ export function Navigation() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-40 transition-colors duration-[var(--duration-base)] ${
-        onProject && scrolled ? "bg-void/90 backdrop-blur-sm" : ""
+        backed && scrolled ? "bg-void/90 backdrop-blur-sm" : ""
       }`}
     >
       <div className="container-editorial flex items-center justify-between py-6">
@@ -52,7 +53,7 @@ export function Navigation() {
         <nav aria-label="Primary" className="hidden md:block">
           <ul className="flex items-center gap-8">
             {site.navigation.map((item) => {
-              const active = pathname === item.href;
+              const active = isActive(item.href);
               return (
                 <li key={item.href}>
                   <Link
@@ -89,7 +90,7 @@ export function Navigation() {
         >
           <ul className="container-editorial flex flex-col gap-6 py-8">
             {site.navigation.map((item) => {
-              const active = pathname === item.href;
+              const active = isActive(item.href);
               return (
                 <li key={item.href}>
                   <Link

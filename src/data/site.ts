@@ -16,9 +16,12 @@ export const site = {
   heroKicker: "A PERSONAL PORTFOLIO",
   description:
     "Portfolio of Anagha MR — a final-year Computer Science student specialising in AI/ML, building software, computer vision, and IoT/security systems.",
-  // Left blank until a public address is provided.
-  email: "",
-  socials: [] as SocialLink[],
+  year: "2026",
+  email: "mr.anagha2004@gmail.com",
+  socials: [
+    { label: "GitHub", href: "https://github.com/Anagha-mr" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/anagha-mr-70b969276" },
+  ] as SocialLink[],
   navigation: [
     { label: "WORK", href: "/work" },
     { label: "ABOUT", href: "/about" },
