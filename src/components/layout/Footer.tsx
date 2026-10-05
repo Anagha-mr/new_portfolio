@@ -15,7 +15,7 @@ export function Footer() {
           <ul className="flex flex-wrap gap-x-8 gap-y-3 font-mono text-xs uppercase tracking-[0.2em] text-stone">
             {site.navigation.map((item) => (
               <li key={item.href}>
-                <Link href={item.href} className="thread-underline hover:text-ivory">
+                <Link href={item.href} className="accent-underline hover:text-ivory">
                   {item.label}
                 </Link>
               </li>

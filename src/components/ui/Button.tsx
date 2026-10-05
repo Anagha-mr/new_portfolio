@@ -4,12 +4,12 @@ import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from "reac
 type Variant = "primary" | "ghost";
 
 const base =
-  "inline-flex items-center gap-3 font-mono text-xs uppercase tracking-[0.15em] transition-colors duration-[var(--duration-fast)]";
+  "inline-flex items-center gap-3 font-mono text-xs uppercase tracking-[0.2em] transition-colors duration-[var(--duration-fast)]";
 
 const variants: Record<Variant, string> = {
   primary:
-    "border border-cherry px-5 py-3 text-ivory hover:bg-cherry hover:text-void",
-  ghost: "text-stone hover:text-ivory",
+    "border border-cherry px-5 py-3 text-ivory hover:bg-cherry focus-visible:bg-cherry active:border-deep-cherry active:bg-deep-cherry",
+  ghost: "text-stone hover:text-ivory focus-visible:text-ivory active:text-silver",
 };
 
 type CommonProps = {

@@ -13,7 +13,7 @@ export function ProjectOutcomes({ project, tone, index }: { project: DetailedPro
         {outcomes.items.map((item) => (
           <div key={item.label} data-reveal className="flex flex-col">
             <dd className="order-1 font-display text-6xl leading-none md:text-8xl">{item.value}</dd>
-            <dt className={`order-2 mt-4 font-mono text-xs uppercase tracking-[0.15em] ${t.muted}`}>
+            <dt className={`order-2 mt-4 font-mono text-xs uppercase tracking-[0.2em] ${t.muted}`}>
               {item.label}
             </dt>
             {item.note && <dd className={`order-3 mt-1 text-sm ${t.soft}`}>{item.note}</dd>}

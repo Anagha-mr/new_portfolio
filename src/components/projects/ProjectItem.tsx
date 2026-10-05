@@ -1,8 +1,5 @@
-"use client";
-
 import Link from "next/link";
 import type { Project } from "@/data/projects";
-import { useThreadAnchor } from "@/thread/ThreadLayer";
 
 type ProjectItemProps = {
   project: Project;
@@ -12,7 +9,6 @@ type ProjectItemProps = {
 const rowClass = "grid grid-cols-12 items-center gap-4 py-8 md:py-10";
 
 export function ProjectItem({ project, index }: ProjectItemProps) {
-  const { attach, ...handlers } = useThreadAnchor(project.slug);
   const linked = project.detail !== undefined;
 
   const content = (
@@ -29,18 +25,18 @@ export function ProjectItem({ project, index }: ProjectItemProps) {
         {project.title}
       </span>
 
-      <span className="col-span-6 mt-2 font-mono text-xs uppercase tracking-[0.1em] text-stone md:col-span-3 md:mt-0">
+      <span className="col-span-6 col-start-3 mt-2 font-mono text-xs uppercase tracking-[0.1em] text-stone md:col-span-3 md:col-start-auto md:mt-0">
         {project.category}
       </span>
 
-      <span className="col-span-6 mt-2 text-right font-mono text-xs uppercase tracking-[0.1em] text-silver md:col-span-1 md:mt-0">
+      <span className="col-span-4 mt-2 text-right font-mono text-xs uppercase tracking-[0.1em] text-silver md:col-span-1 md:mt-0">
         {project.year}
       </span>
     </>
   );
 
   return (
-    <li ref={attach} {...(linked ? handlers : {})} className="border-b border-stone/30">
+    <li className="border-b border-stone/30">
       {linked ? (
         <Link href={`/work/${project.slug}`} className={`group ${rowClass}`}>
           {content}

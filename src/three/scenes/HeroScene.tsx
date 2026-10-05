@@ -40,11 +40,11 @@ function HeroComposition({ quality }: { quality: QualityConfig }) {
   );
 }
 
-export default function HeroScene() {
+export default function HeroScene({ paused = false }: { paused?: boolean }) {
   const quality = useQualityTier();
 
   return (
-    <SpatialScene>
+    <SpatialScene paused={paused}>
       <HeroComposition quality={quality} />
     </SpatialScene>
   );

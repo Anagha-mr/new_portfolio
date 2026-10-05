@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, type RefObject } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { createThreadMaterial } from "../materials/threadMaterial";
@@ -19,6 +19,8 @@ export type RedThreadProps = ThreadPathConfig & {
   entrance?: EntranceRef;
   /** Hero scroll-out progress; retracts the tube from its start. */
   exit?: EntranceRef;
+  /** Lets a controller reshape the tube in place (see `retubeGeometry`). */
+  meshRef?: RefObject<THREE.Mesh | null>;
 };
 
 /** Fraction of the entrance timeline at which the reveal starts. */
@@ -48,6 +50,24 @@ function applyDrawRange(
   if (geo.drawRange.start !== start || geo.drawRange.count !== count) geo.setDrawRange(start, count);
 }
 
+/**
+ * Rebuilds the tube along new points by rewriting the existing vertex buffers,
+ * so the same GPU buffers, draw range and React tree survive. Ring and segment
+ * counts are unchanged, so the index buffer is reused as-is.
+ */
+export function retubeGeometry(geo: THREE.TubeGeometry, points: THREE.Vector3[]) {
+  const { tubularSegments, radius, radialSegments, closed } = geo.parameters;
+  const next = new THREE.TubeGeometry(createThreadCurve(points), tubularSegments, radius, radialSegments, closed);
+  for (const name of ["position", "normal"] as const) {
+    const attribute = geo.getAttribute(name) as THREE.BufferAttribute;
+    (attribute.array as Float32Array).set(next.getAttribute(name).array as Float32Array);
+    attribute.needsUpdate = true;
+  }
+  // Recomputed lazily by the renderer for frustum culling, as for a fresh geometry.
+  geo.boundingSphere = null;
+  next.dispose();
+}
+
 /** Geometry-only renderer; motion is driven by `ThreadController`. */
 export function RedThread({
   points,
@@ -60,8 +80,10 @@ export function RedThread({
   color,
   entrance,
   exit,
+  meshRef: externalRef,
 }: RedThreadProps) {
-  const meshRef = useRef<THREE.Mesh>(null);
+  const localRef = useRef<THREE.Mesh>(null);
+  const meshRef = externalRef ?? localRef;
 
   const geometry = useMemo(() => {
     const curvePoints = points ?? generateOrbitalPath({ segments, radius, rise });

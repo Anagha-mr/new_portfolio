@@ -1,9 +1,9 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
-import type { Group } from "three";
-import { RedThread, type RedThreadProps } from "./RedThread";
+import type { Group, Mesh, TubeGeometry } from "three";
+import { RedThread, retubeGeometry, type RedThreadProps } from "./RedThread";
 import { generateOrbitalPath, applyOrganicDrift } from "./ThreadPath";
 import { usePointer } from "../hooks/usePointer";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
@@ -28,6 +28,7 @@ export function ThreadController({
   ...rest
 }: ThreadControllerProps) {
   const groupRef = useRef<Group>(null);
+  const meshRef = useRef<Mesh>(null);
   const pointer = usePointer();
   const reducedMotion = useReducedMotion();
   const elapsed = useRef(0);
@@ -37,8 +38,6 @@ export function ThreadController({
     [explicitPoints, segments, radius, rise]
   );
 
-  const [drivenPoints, setDrivenPoints] = useState(basePoints);
-
   useFrame((state, delta) => {
     // Drift and pointer tension wait until the entrance has resolved.
     const settled = !entrance || entrance.current >= 1;
@@ -47,7 +46,9 @@ export function ThreadController({
       elapsed.current += delta;
       if (elapsed.current >= DRIFT_INTERVAL) {
         elapsed.current = 0;
-        setDrivenPoints(applyOrganicDrift(basePoints, state.clock.elapsedTime));
+        // Reshaped in place: no React render and no geometry reallocation.
+        const geo = meshRef.current?.geometry as TubeGeometry | undefined;
+        if (geo) retubeGeometry(geo, applyOrganicDrift(basePoints, state.clock.elapsedTime));
       }
     }
 
@@ -66,7 +67,8 @@ export function ThreadController({
     <group ref={groupRef}>
       <RedThread
         {...rest}
-        points={reducedMotion ? basePoints : drivenPoints}
+        points={basePoints}
+        meshRef={meshRef}
         entrance={entrance}
         exit={exit}
       />

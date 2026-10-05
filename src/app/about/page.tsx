@@ -26,8 +26,8 @@ export default function AboutPage() {
           <div className="mt-10 md:mt-14 md:grid md:grid-cols-12 md:gap-x-10">
             <p className="max-w-xl text-lg leading-relaxed text-silver md:col-span-7 md:col-start-4">
               A final-year Computer Science student specialising in AI/ML. Work
-              spans software systems, computer vision, IoT/security systems ,full-stack product
-              development and AIML.
+              spans software systems, computer vision, IoT/security systems, full-stack product
+              development and AI/ML.
             </p>
           </div>
         </header>
@@ -63,7 +63,7 @@ export default function AboutPage() {
                 {role.project && (
                   <Link
                     href={`/work/${role.project}`}
-                    className="thread-underline mt-6 inline-block font-mono text-xs uppercase tracking-[0.2em] text-ivory"
+                    className="accent-underline mt-6 inline-block font-mono text-xs uppercase tracking-[0.2em] text-ivory"
                   >
                     Project page →
                   </Link>
@@ -79,7 +79,7 @@ export default function AboutPage() {
                   key={group.category}
                   className="grid grid-cols-1 gap-x-8 gap-y-2 sm:grid-cols-[9rem_1fr]"
                 >
-                  <dt className="pt-1 font-mono text-xs uppercase tracking-[0.15em] text-stone">
+                  <dt className="pt-1 font-mono text-xs uppercase tracking-[0.2em] text-stone">
                     {group.category}
                   </dt>
                   <dd>

@@ -3,11 +3,15 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
 
-/** Mount fade retriggered on every route change. */
+/**
+ * Opacity-only fade on client-side route changes. The first load renders
+ * visible so server HTML is readable before hydration, and no transform is
+ * applied, so fixed and sticky descendants keep the viewport as their frame.
+ */
 export function PageTransition({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const [trackedPath, setTrackedPath] = useState(pathname);
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
 
   if (pathname !== trackedPath) {
     setTrackedPath(pathname);
@@ -15,15 +19,19 @@ export function PageTransition({ children }: { children: ReactNode }) {
   }
 
   useEffect(() => {
-    const frame = requestAnimationFrame(() => setVisible(true));
+    if (visible) return;
+    // Two frames so the hidden state is painted before the fade starts.
+    let frame = requestAnimationFrame(() => {
+      frame = requestAnimationFrame(() => setVisible(true));
+    });
     return () => cancelAnimationFrame(frame);
-  }, [trackedPath]);
+  }, [visible]);
 
   return (
     <div
-      className={`transition-all duration-[var(--duration-slow)] ease-editorial ${
-        visible ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
-      }`}
+      className={
+        visible ? "opacity-100 transition-opacity duration-[var(--duration-base)] ease-editorial" : "opacity-0"
+      }
     >
       {children}
     </div>

@@ -53,14 +53,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} h-full`}
     >
       <body className="min-h-full bg-void text-ivory antialiased">
-        <SmoothScroll>
-          <Cursor />
-          <Navigation />
-          <main>
-            <PageTransition>{children}</PageTransition>
-          </main>
-          <Footer />
-        </SmoothScroll>
+        <SmoothScroll />
+        <Cursor />
+        <Navigation />
+        <main>
+          <PageTransition>{children}</PageTransition>
+        </main>
+        <Footer />
       </body>
     </html>
   );

@@ -67,7 +67,7 @@
     padding-inline: var(--gutter);
   }
 
-  .thread-underline {
+  .accent-underline {
     background-image: linear-gradient(var(--color-cherry), var(--color-cherry));
     background-size: 0% 1px;
     background-position: 0 100%;
@@ -75,8 +75,8 @@
     transition: background-size var(--duration-base) var(--ease-editorial);
   }
 
-  .thread-underline:hover,
-  .thread-underline:focus-visible {
+  .accent-underline:hover,
+  .accent-underline:focus-visible {
     background-size: 100% 1px;
   }
 

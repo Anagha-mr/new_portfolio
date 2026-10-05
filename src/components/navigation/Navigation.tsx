@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { site } from "@/data/site";
 
 export function Navigation() {
@@ -10,7 +10,8 @@ export function Navigation() {
   const [open, setOpen] = useState(false);
   const [lastPathname, setLastPathname] = useState(pathname);
   const [scrolled, setScrolled] = useState(false);
-  const backed = pathname !== "/";
+  const toggleRef = useRef<HTMLButtonElement>(null);
+  const home = pathname === "/";
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
   if (pathname !== lastPathname) {
@@ -19,18 +20,23 @@ export function Navigation() {
     setScrolled(false);
   }
 
-  // Inner pages scroll content under the bar; it gets a backing once they do.
+  // The bar gets a backing once content scrolls under it; on home, only after the hero.
   useEffect(() => {
-    if (!backed) return;
-    const handleScroll = () => setScrolled(window.scrollY > 80);
+    const handleScroll = () => {
+      const threshold = home ? window.innerHeight * 0.85 : 80;
+      setScrolled(window.scrollY > threshold);
+    };
+    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [backed]);
+  }, [home]);
 
   useEffect(() => {
     if (!open) return;
     const handleKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key !== "Escape") return;
+      setOpen(false);
+      toggleRef.current?.focus();
     };
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
@@ -39,13 +45,13 @@ export function Navigation() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-40 transition-colors duration-[var(--duration-base)] ${
-        backed && scrolled ? "bg-void/90 backdrop-blur-sm" : ""
+        scrolled ? "bg-void/90 backdrop-blur-sm" : ""
       }`}
     >
       <div className="container-editorial flex items-center justify-between py-6">
         <Link
           href="/"
-          className="font-mono text-xs uppercase tracking-[0.2em] text-ivory"
+          className="font-mono text-xs uppercase tracking-[0.2em] text-ivory transition-colors duration-[var(--duration-fast)] hover:text-silver"
         >
           Anagha MR
         </Link>
@@ -59,8 +65,8 @@ export function Navigation() {
                   <Link
                     href={item.href}
                     aria-current={active ? "page" : undefined}
-                    className={`thread-underline font-mono text-xs uppercase tracking-[0.2em] ${
-                      active ? "text-cherry" : "text-ivory/80 hover:text-ivory"
+                    className={`accent-underline font-mono text-xs uppercase tracking-[0.2em] transition-colors duration-[var(--duration-fast)] ${
+                      active ? "text-cherry" : "text-ivory/80 hover:text-ivory focus-visible:text-ivory"
                     }`}
                   >
                     {item.label}
@@ -72,8 +78,9 @@ export function Navigation() {
         </nav>
 
         <button
+          ref={toggleRef}
           type="button"
-          className="font-mono text-xs uppercase tracking-[0.2em] text-ivory md:hidden"
+          className="-my-3 py-3 font-mono text-xs uppercase tracking-[0.2em] text-ivory md:hidden"
           aria-expanded={open}
           aria-controls="mobile-nav"
           onClick={() => setOpen((value) => !value)}

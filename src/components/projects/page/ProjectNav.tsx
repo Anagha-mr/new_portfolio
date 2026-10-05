@@ -29,7 +29,7 @@ export function ProjectNav({ slug }: { slug: string }) {
           <div className="order-last col-span-2 md:order-none md:col-span-4 md:text-center">
             <Link
               href="/work"
-              className="thread-underline font-mono text-xs uppercase tracking-[0.2em] text-stone hover:text-ivory"
+              className="accent-underline font-mono text-xs uppercase tracking-[0.2em] text-stone hover:text-ivory"
             >
               All work
             </Link>

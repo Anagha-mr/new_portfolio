@@ -12,13 +12,11 @@ const displayHref = (href: string) => href.replace(/^https?:\/\/(www\.)?/, "").r
 const rowClass =
   "flex flex-col gap-1 border-t border-stone/30 py-5 sm:flex-row sm:items-baseline sm:gap-8";
 const labelClass = "font-mono text-xs uppercase tracking-[0.2em] text-stone sm:w-32 sm:shrink-0";
-const linkClass = "group thread-underline w-fit break-words text-lg text-ivory";
+const linkClass = "group accent-underline w-fit break-words text-lg text-ivory";
 
 export default function ContactPage() {
   const channels = [
-    ...(site.email
-      ? [{ label: "Email", href: `mailto:${site.email}`, text: site.email, external: false }]
-      : []),
+    { label: "Email", href: `mailto:${site.email}`, text: site.email, external: false },
     ...site.socials.map((social) => ({
       label: social.label,
       href: social.href,
@@ -34,34 +32,29 @@ export default function ContactPage() {
           Get in touch.
         </h1>
 
-        {channels.length > 0 ? (
-          <ul className="mt-16 max-w-3xl md:mt-24">
-            {channels.map((channel) => (
-              <li key={channel.href} className={rowClass}>
-                <span className={labelClass}>{channel.label}</span>
-                <a
-                  href={channel.href}
-                  className={linkClass}
-                  {...(channel.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                >
-                  {channel.text}
-                  {channel.external && (
-                    <span
-                      aria-hidden="true"
-                      className="ml-2 text-stone transition-colors duration-[var(--duration-fast)] group-hover:text-cherry group-focus-visible:text-cherry"
-                    >
-                      ↗
-                    </span>
-                  )}
-                </a>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className="mt-16 font-mono text-xs uppercase tracking-[0.2em] text-stone md:mt-24">
-            Contact details to be added.
-          </p>
-        )}
+        <ul className="mt-16 max-w-3xl md:mt-24">
+          {channels.map((channel) => (
+            <li key={channel.href} className={rowClass}>
+              <span className={labelClass}>{channel.label}</span>
+              <a
+                href={channel.href}
+                className={linkClass}
+                {...(channel.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              >
+                {channel.text}
+                {channel.external && <span className="sr-only"> (opens in a new tab)</span>}
+                {channel.external && (
+                  <span
+                    aria-hidden="true"
+                    className="ml-2 text-stone transition-colors duration-[var(--duration-fast)] group-hover:text-cherry group-focus-visible:text-cherry"
+                  >
+                    ↗
+                  </span>
+                )}
+              </a>
+            </li>
+          ))}
+        </ul>
       </Container>
     </div>
   );

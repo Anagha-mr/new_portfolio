@@ -46,11 +46,12 @@ export function ProjectOverview({ project, tone, index }: { project: DetailedPro
           </ul>
 
           {links && links.length > 0 && (
-            <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs uppercase tracking-[0.15em]">
+            <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs uppercase tracking-[0.2em]">
               {links.map((link) => (
                 <li key={link.href}>
-                  <a href={link.href} className="thread-underline" target="_blank" rel="noreferrer">
-                    {link.label} ↗
+                  <a href={link.href} className="accent-underline" target="_blank" rel="noopener noreferrer">
+                    {link.label} <span aria-hidden="true">↗</span>
+                    <span className="sr-only"> (opens in a new tab)</span>
                   </a>
                 </li>
               ))}

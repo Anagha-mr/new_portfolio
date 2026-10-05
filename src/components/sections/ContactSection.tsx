@@ -2,7 +2,6 @@ import { site } from "@/data/site";
 import { Container } from "@/components/layout/Container";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Button } from "@/components/ui/Button";
-import { ThreadLayer } from "@/thread/ThreadLayer";
 
 export function ContactSection() {
   return (
@@ -10,34 +9,31 @@ export function ContactSection() {
       <Container>
         <SectionLabel index="04" title="Contact" />
 
-        <ThreadLayer
-          preset="contact"
-          className="mt-12 flex flex-col gap-8 md:flex-row md:items-end md:justify-between"
-        >
-          <p className="max-w-xl font-display text-3xl text-ivory md:text-4xl">
-            {site.email ? (
-              <a href={`mailto:${site.email}`} className="thread-underline">
-                {site.email}
-              </a>
-            ) : (
-              "Get in touch."
-            )}
+        <div className="mt-12 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+          <p className="max-w-xl break-words font-display text-3xl text-ivory md:text-4xl">
+            <a href={`mailto:${site.email}`} className="accent-underline">
+              {site.email}
+            </a>
           </p>
 
           <Button href="/contact">Contact →</Button>
-        </ThreadLayer>
+        </div>
 
-        {site.socials.length > 0 && (
-          <ul className="mt-10 flex flex-wrap gap-6 font-mono text-xs uppercase tracking-[0.15em] text-stone">
-            {site.socials.map((social) => (
-              <li key={social.href}>
-                <a href={social.href} className="thread-underline hover:text-ivory">
-                  {social.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        )}
+        <ul className="mt-10 flex flex-wrap gap-6 font-mono text-xs uppercase tracking-[0.2em] text-stone">
+          {site.socials.map((social) => (
+            <li key={social.href}>
+              <a
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="accent-underline transition-colors duration-[var(--duration-fast)] hover:text-ivory"
+              >
+                {social.label} <span aria-hidden="true">↗</span>
+                <span className="sr-only"> (opens in a new tab)</span>
+              </a>
+            </li>
+          ))}
+        </ul>
       </Container>
     </section>
   );

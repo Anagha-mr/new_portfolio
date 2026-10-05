@@ -42,7 +42,7 @@ export function CapabilitiesSection() {
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
               {skills.map((group) => (
                 <div key={group.category}>
-                  <p className="font-mono text-xs uppercase tracking-[0.15em] text-stone">
+                  <p className="font-mono text-xs uppercase tracking-[0.2em] text-stone">
                     {group.category}
                   </p>
                   <ul className="mt-3 space-y-1 text-sm text-ivory/90">
