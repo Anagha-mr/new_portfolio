@@ -29,16 +29,16 @@ export function pinShade(h: number): number {
   return Math.min(1.08, Math.max(0.3, 1 + h * 2.4));
 }
 
-/** Grid position of the single cherry pin, as fractions of the side. */
-export const CHERRY_PIN = { col: 0.62, row: 0.4 };
+/** Grid position of the single accent pin, as fractions of the side. */
+export const ACCENT_PIN = { col: 0.62, row: 0.4 };
 
 export function spacingOf(layout: BedLayout): number {
   return layout.width / (layout.size - 1);
 }
 
-export function cherryIndex(layout: BedLayout): number {
-  const col = Math.round(CHERRY_PIN.col * (layout.size - 1));
-  const row = Math.round(CHERRY_PIN.row * (layout.size - 1));
+export function accentIndex(layout: BedLayout): number {
+  const col = Math.round(ACCENT_PIN.col * (layout.size - 1));
+  const row = Math.round(ACCENT_PIN.row * (layout.size - 1));
   return row * layout.size + col;
 }
 

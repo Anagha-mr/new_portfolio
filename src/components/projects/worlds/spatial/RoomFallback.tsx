@@ -26,7 +26,7 @@ function RoomSurfaces() {
       <path d="M0 0 L380 130 V430 L0 700 Z" fill="#2a2723" />
       <path d="M380 130 H900 V430 H380 Z" fill="#34312c" />
       <path d="M900 130 L1200 0 V700 L900 430 Z" fill="#2a2723" />
-      <path d="M470 486 H790 L850 610 H410 Z" fill="#850e17" />
+      <path d="M470 486 H790 L850 610 H410 Z" fill="#24365f" />
       <path d="M430 340 H700 V430 H430 Z M430 296 H700 V340 H430 Z M412 318 H430 V430 H412 Z M700 318 H718 V430 H700 Z" fill="#f1ede5" />
       <ellipse cx={590} cy={512} rx={78} ry={18} fill="#b5b1aa" />
       <path d="M736 168 H876 V292 H736 Z" fill="#d8d2c5" />
@@ -62,7 +62,7 @@ export function RoomFallback({ className = "" }: { className?: string }) {
       <g clipPath="url(#room-result)">
         <RoomSurfaces />
       </g>
-      <path d="M600 0 V700" stroke="#c1121f" strokeOpacity={0.55} strokeWidth={1} vectorEffect="non-scaling-stroke" />
+      <path d="M600 0 V700" stroke="#5b7fc7" strokeOpacity={0.55} strokeWidth={1} vectorEffect="non-scaling-stroke" />
     </svg>
   );
 }

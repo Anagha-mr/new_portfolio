@@ -7,10 +7,8 @@ export type QualityTier = "high" | "medium" | "low";
 export type QualityConfig = {
   tier: QualityTier;
   dpr: [number, number];
-  massDetail: number;
-  threadSegments: number;
-  threadRadialSegments: number;
-  particleCount: number;
+  /** Flecks in the hero's particle painting. */
+  heroParticles: number;
   fogDensity: number;
   pointerInteraction: boolean;
 };
@@ -19,30 +17,21 @@ const TIERS: Record<QualityTier, QualityConfig> = {
   high: {
     tier: "high",
     dpr: [1, 1.5],
-    massDetail: 2,
-    threadSegments: 160,
-    threadRadialSegments: 8,
-    particleCount: 90,
+    heroParticles: 110000,
     fogDensity: 0.035,
     pointerInteraction: true,
   },
   medium: {
     tier: "medium",
     dpr: [1, 1.25],
-    massDetail: 2,
-    threadSegments: 96,
-    threadRadialSegments: 6,
-    particleCount: 45,
+    heroParticles: 70000,
     fogDensity: 0.045,
     pointerInteraction: true,
   },
   low: {
     tier: "low",
     dpr: [1, 1],
-    massDetail: 1,
-    threadSegments: 48,
-    threadRadialSegments: 5,
-    particleCount: 0,
+    heroParticles: 36000,
     fogDensity: 0.06,
     pointerInteraction: false,
   },

@@ -44,7 +44,7 @@ export const temporalRag: DetailedProject = {
             detail: "Date-aware retrieval draws chunks from early, middle and late coverage.",
           },
           {
-            name: "Synthesise",
+            name: "Synthesize",
             detail: "Groq Llama 3.3 writes the analysis from the retrieved chunks, with citations.",
           },
           { name: "Serve", detail: "The app is deployed with Streamlit." },

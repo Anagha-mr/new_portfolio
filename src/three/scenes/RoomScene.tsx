@@ -102,12 +102,12 @@ function RoomComposition({ interactive }: { interactive: boolean }) {
       <ambientLight intensity={0.85} color="#b5b1aa" />
       <directionalLight position={[3, 6, 5]} intensity={1.9} color="#f1ede5" />
       <pointLight position={[1.2, 2.3, -2.2]} intensity={7} distance={6} decay={2} color="#f1ede5" />
-      <pointLight position={[-1, 1.2, 3.5]} intensity={0.3} distance={9} decay={2} color="#850e17" />
+      <pointLight position={[-1, 1.2, 3.5]} intensity={0.3} distance={9} decay={2} color="#2a4a8f" />
 
       <Room clip={clip} />
 
       <lineSegments ref={edgeRef} geometry={edgeGeometry} position={[ROOM_MIN_X, 0, 0]}>
-        <lineBasicMaterial color="#c1121f" transparent opacity={0.8} />
+        <lineBasicMaterial color="#5b7fc7" transparent opacity={0.8} />
       </lineSegments>
     </>
   );

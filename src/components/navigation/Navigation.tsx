@@ -23,7 +23,9 @@ export function Navigation() {
   // The bar gets a backing once content scrolls under it; on home, only after the hero.
   useEffect(() => {
     const handleScroll = () => {
-      const threshold = home ? window.innerHeight * 0.85 : 80;
+      // The home hero is a tall scroll region; the backing waits until it has passed.
+      const heroHeight = document.getElementById("hero")?.offsetHeight ?? window.innerHeight;
+      const threshold = home ? heroHeight - window.innerHeight * 0.15 : 80;
       setScrolled(window.scrollY > threshold);
     };
     handleScroll();
@@ -66,7 +68,7 @@ export function Navigation() {
                     href={item.href}
                     aria-current={active ? "page" : undefined}
                     className={`accent-underline font-mono text-xs uppercase tracking-[0.2em] transition-colors duration-[var(--duration-fast)] ${
-                      active ? "text-cherry" : "text-ivory/80 hover:text-ivory focus-visible:text-ivory"
+                      active ? "text-cobalt" : "text-ivory/80 hover:text-ivory focus-visible:text-ivory"
                     }`}
                   >
                     {item.label}
@@ -104,7 +106,7 @@ export function Navigation() {
                     href={item.href}
                     aria-current={active ? "page" : undefined}
                     className={`font-display text-3xl ${
-                      active ? "text-cherry" : "text-ivory"
+                      active ? "text-cobalt" : "text-ivory"
                     }`}
                   >
                     {item.label}

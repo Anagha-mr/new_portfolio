@@ -13,7 +13,7 @@ function ExperimentEntry({ experiment, index }: { experiment: Experiment; index:
         href={`/play/${experiment.slug}`}
         className="group grid grid-cols-12 gap-x-4 gap-y-8 py-12 md:py-16"
       >
-        <span className="col-span-2 pt-3 font-mono text-sm text-stone transition-colors duration-[var(--duration-fast)] group-hover:text-cherry group-focus-visible:text-cherry md:col-span-1">
+        <span className="col-span-2 pt-3 font-mono text-sm text-stone transition-colors duration-[var(--duration-fast)] group-hover:text-cobalt group-focus-visible:text-cobalt md:col-span-1">
           {pad(index)}
         </span>
 

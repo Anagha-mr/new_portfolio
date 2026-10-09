@@ -153,7 +153,7 @@ function Schedule({ layout, className }: { layout: Layout; className: string }) 
           width={barH}
           height={barH}
           transform={`rotate(45 ${x(MILESTONE_X)} ${milestoneY})`}
-          fill="#c1121f"
+          fill="#5b7fc7"
         />
       </g>
     </svg>

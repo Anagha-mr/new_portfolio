@@ -27,18 +27,18 @@ const instrumentSerif = Instrument_Serif({
 
 export const metadata: Metadata = {
   title: {
-    default: `${site.name} — ${site.project}`,
+    default: site.name,
     template: `%s — ${site.name}`,
   },
   description: site.description,
   openGraph: {
-    title: `${site.name} — ${site.project}`,
+    title: site.name,
     description: site.description,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} — ${site.project}`,
+    title: site.name,
     description: site.description,
   },
   icons: {

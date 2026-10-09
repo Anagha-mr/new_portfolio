@@ -20,7 +20,7 @@ export function ProjectMeta({ project, className = "" }: { project: DetailedProj
       <div className="flex items-center gap-2">
         <dt className="text-stone/70">Status</dt>
         <dd className="flex items-center gap-2 text-silver">
-          {ongoing && <span aria-hidden="true" className="size-1.5 rounded-full bg-cherry" />}
+          {ongoing && <span aria-hidden="true" className="size-1.5 rounded-full bg-cobalt" />}
           {status.label}
           {status.note && <span className="text-stone">· {status.note}</span>}
         </dd>

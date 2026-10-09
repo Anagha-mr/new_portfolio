@@ -46,7 +46,7 @@ export default function ContactPage() {
                 {channel.external && (
                   <span
                     aria-hidden="true"
-                    className="ml-2 text-stone transition-colors duration-[var(--duration-fast)] group-hover:text-cherry group-focus-visible:text-cherry"
+                    className="ml-2 text-stone transition-colors duration-[var(--duration-fast)] group-hover:text-cobalt group-focus-visible:text-cobalt"
                   >
                     ↗
                   </span>

@@ -10,7 +10,7 @@ export function GestureSystem({ data, tone }: { data: GestureData; tone: Tone })
       <ol className="grid grid-cols-1 gap-y-10 md:grid-cols-4 md:gap-x-6">
         {data.stages.map((stage, i) => (
           <li key={stage.name} data-reveal className={`relative border-t pt-6 ${t.ruleStrong}`}>
-            <p className="font-mono text-xs text-cherry">{String(i + 1).padStart(2, "0")}</p>
+            <p className={`font-mono text-xs ${t.accent}`}>{String(i + 1).padStart(2, "0")}</p>
             <h3 className="mt-3 font-display text-3xl leading-tight md:text-4xl">{stage.name}</h3>
             <p className={`mt-3 max-w-[15rem] text-sm leading-relaxed ${t.soft}`}>{stage.detail}</p>
             {i < data.stages.length - 1 && (

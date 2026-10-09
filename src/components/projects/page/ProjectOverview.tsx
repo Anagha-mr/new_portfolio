@@ -36,7 +36,7 @@ export function ProjectOverview({ project, tone, index }: { project: DetailedPro
               <li key={item} data-reveal className="flex gap-4">
                 <span
                   aria-hidden="true"
-                  className={`shrink-0 pt-px font-mono text-xs ${numbered ? t.muted : "text-cherry"}`}
+                  className={`shrink-0 pt-px font-mono text-xs ${numbered ? t.muted : t.accent}`}
                 >
                   {numbered ? String(i + 1).padStart(2, "0") : "—"}
                 </span>

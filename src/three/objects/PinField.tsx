@@ -9,7 +9,7 @@ import {
   PIN_PROTRUSION,
   PIN_RADIUS_RATIO,
   PIN_TRAVEL,
-  cherryIndex,
+  accentIndex,
   pinShade,
   restingImpression,
   spacingOf,
@@ -104,12 +104,12 @@ export function PinField({ layout, input, still = false, castShadow = true }: Pi
     const mesh = new THREE.InstancedMesh(geometry, material, field.count);
     const matrix = new THREE.Matrix4();
     const ivory = new THREE.Color(materialPalette.ivory);
-    const cherry = new THREE.Color(materialPalette.cherry);
-    const accent = cherryIndex(layout);
+    const highlight = new THREE.Color(materialPalette.cobalt);
+    const accent = accentIndex(layout);
     const colors = new Float32Array(field.count * 3);
 
     for (let i = 0; i < field.count; i += 1) {
-      const color = i === accent ? cherry : ivory;
+      const color = i === accent ? highlight : ivory;
       mesh.setMatrixAt(i, matrix.makeTranslation(field.xs[i], baseY, field.zs[i]));
       mesh.setColorAt(i, color);
       color.toArray(colors, i * 3);

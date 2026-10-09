@@ -65,7 +65,9 @@ export function TimelineSystem({ data, tone }: { data: TimelineData; tone: Tone 
               aria-hidden="true"
               className={`absolute left-0 top-1 size-[11px] rounded-full border border-void/50 bg-ivory transition-colors duration-300 md:top-0 ${
                 retrieval
-                  ? "data-[active=true]:border-cherry data-[active=true]:bg-cherry"
+                  ? tone === "ivory"
+                    ? "data-[active=true]:border-deep-cobalt data-[active=true]:bg-deep-cobalt"
+                    : "data-[active=true]:border-cobalt data-[active=true]:bg-cobalt"
                   : "data-[active=true]:bg-void"
               }`}
             />

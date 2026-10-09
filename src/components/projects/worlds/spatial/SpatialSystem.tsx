@@ -82,8 +82,8 @@ function Personalisation() {
       {points.map(([x, y], i) => (
         <circle key={i} cx={x} cy={y} r={2.6} fill={IVORY} fillOpacity={0.55} />
       ))}
-      <circle cx={104} cy={44} r={9} stroke="#c1121f" />
-      <circle cx={104} cy={44} r={3} fill="#c1121f" />
+      <circle cx={104} cy={44} r={9} stroke="#5b7fc7" />
+      <circle cx={104} cy={44} r={3} fill="#5b7fc7" />
     </Frame>
   );
 }
@@ -103,7 +103,7 @@ export function SpatialSystem({ data, tone }: { data: SpatialData; tone: Tone })
               <Visual />
             </div>
             <div className="md:mt-6">
-              <p className="font-mono text-xs text-cherry">{String(i + 1).padStart(2, "0")}</p>
+              <p className={`font-mono text-xs ${t.accent}`}>{String(i + 1).padStart(2, "0")}</p>
               <h3 className="mt-2 font-display text-2xl leading-tight md:text-[1.7rem]">{stage.name}</h3>
               <p className={`mt-2 font-mono text-[0.7rem] uppercase tracking-[0.1em] ${t.muted}`}>{stage.model}</p>
               <p className={`mt-3 text-sm leading-relaxed ${t.soft}`}>{stage.detail}</p>

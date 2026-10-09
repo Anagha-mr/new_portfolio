@@ -27,7 +27,7 @@ export function CapabilitiesSection() {
                 <ul className="mt-6 space-y-2 text-sm text-silver">
                   {role.highlights.map((highlight) => (
                     <li key={highlight} className="flex gap-3">
-                      <span aria-hidden="true" className="text-cherry">
+                      <span aria-hidden="true" className="text-cobalt">
                         —
                       </span>
                       {highlight}

@@ -6,8 +6,10 @@
   /* colour */
   --color-void: #080807;
   --color-ivory: #f1ede5;
-  --color-cherry: #c1121f;
-  --color-deep-cherry: #850e17;
+  /* Interaction accent, sampled from the hero painting's blues. */
+  --color-cobalt: #5b7fc7;
+  --color-deep-cobalt: #2a4a8f;
+  --color-frost: #a9bedd;
   --color-charcoal: #181715;
   --color-stone: #817b73;
   --color-silver: #b5b1aa;
@@ -19,7 +21,6 @@
 
   /* motion */
   --ease-editorial: cubic-bezier(0.19, 1, 0.22, 1);
-  --ease-thread: cubic-bezier(0.65, 0, 0.35, 1);
 
   /* layout */
   --breakpoint-xs: 30rem;
@@ -50,13 +51,19 @@
   }
 
   ::selection {
-    background: var(--color-cherry);
+    background: var(--color-deep-cobalt);
     color: var(--color-ivory);
   }
 
   :focus-visible {
-    outline: 1px solid var(--color-cherry);
+    outline: 1px solid var(--color-frost);
     outline-offset: 3px;
+  }
+
+  /* Frost disappears on ivory; the deep accent holds contrast there. */
+  .bg-ivory :focus-visible,
+  .bg-ivory:focus-visible {
+    outline-color: var(--color-deep-cobalt);
   }
 }
 
@@ -68,7 +75,7 @@
   }
 
   .accent-underline {
-    background-image: linear-gradient(var(--color-cherry), var(--color-cherry));
+    background-image: linear-gradient(var(--color-cobalt), var(--color-cobalt));
     background-size: 0% 1px;
     background-position: 0 100%;
     background-repeat: no-repeat;

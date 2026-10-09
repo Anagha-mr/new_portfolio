@@ -5,7 +5,7 @@ import { Container } from "@/components/layout/Container";
 const pad = (n: number) => String(n).padStart(2, "0");
 
 const titleClass =
-  "mt-3 font-display text-3xl leading-tight transition-colors duration-[var(--duration-fast)] group-hover:text-cherry group-focus-visible:text-cherry md:text-5xl";
+  "mt-3 font-display text-3xl leading-tight transition-colors duration-[var(--duration-fast)] group-hover:text-cobalt group-focus-visible:text-cobalt md:text-5xl";
 
 /** Previous / next in display order, wrapping at the ends, with a route back to the index. */
 export function ProjectNav({ slug }: { slug: string }) {

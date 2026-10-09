@@ -10,7 +10,6 @@ export type SocialLink = {
 
 export const site = {
   name: "Anagha MR",
-  project: "The Red Thread",
   role: "AI / Software / IoT",
   program: "CSE — AI/ML",
   heroKicker: "A PERSONAL PORTFOLIO",

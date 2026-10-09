@@ -289,7 +289,7 @@ export function GestureStage({ latency }: { latency: string }) {
               dotsRef.current[i] = el;
             }}
             r={i === INDEX_TIP ? 6 : 3.5}
-            fill={i === INDEX_TIP ? "#c1121f" : "#f1ede5"}
+            fill={i === INDEX_TIP ? "#5b7fc7" : "#f1ede5"}
             fillOpacity={i === INDEX_TIP ? 1 : 0.85}
           />
         ))}
@@ -348,11 +348,11 @@ export function GestureStage({ latency }: { latency: string }) {
 
         <div
           ref={ringRef}
-          className="absolute size-8 -translate-x-1/2 -translate-y-1/2 rounded-full border border-cherry opacity-0"
+          className="absolute size-8 -translate-x-1/2 -translate-y-1/2 rounded-full border border-cobalt opacity-0"
         />
         <div
           ref={cursorRef}
-          className="absolute size-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cherry"
+          className="absolute size-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cobalt"
           style={{ left: "50%", top: "45%" }}
         />
       </div>

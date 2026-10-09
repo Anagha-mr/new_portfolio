@@ -10,7 +10,7 @@ export function WorkflowSystem({ data, tone }: { data: WorkflowData; tone: Tone 
       <p
         className={`absolute -top-[0.7rem] left-5 flex items-center gap-3 bg-void px-3 font-mono text-xs uppercase tracking-[0.15em] md:left-10 ${t.soft}`}
       >
-        <span aria-hidden="true" className="size-1.5 bg-cherry" />
+        <span aria-hidden="true" className={`size-1.5 ${t.accentFill}`} />
         {data.boundary.label}
         {data.boundary.detail && <span className={t.muted}>· {data.boundary.detail}</span>}
       </p>
@@ -20,7 +20,7 @@ export function WorkflowSystem({ data, tone }: { data: WorkflowData; tone: Tone 
           <li key={group.name}>
             <div className="flex items-center gap-4">
               <h3 className={`shrink-0 font-mono text-xs uppercase tracking-[0.2em] ${t.strong}`}>
-                <span className="mr-3 text-cherry">{String(gi + 1).padStart(2, "0")}</span>
+                <span className={`mr-3 ${t.accent}`}>{String(gi + 1).padStart(2, "0")}</span>
                 {group.name}
               </h3>
               <span aria-hidden="true" className={`hidden h-px flex-1 border-t ${t.ruleStrong} md:block`} />

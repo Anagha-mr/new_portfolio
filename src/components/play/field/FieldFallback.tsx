@@ -2,7 +2,7 @@ import {
   PIN_PROTRUSION,
   PIN_RADIUS_RATIO,
   VIEW_ELEVATION_DEG,
-  cherryIndex,
+  accentIndex,
   pinShade,
   restingImpression,
   spacingOf,
@@ -43,7 +43,7 @@ function buildBed() {
   const spacing = spacingOf(LAYOUT);
   const half = width / 2;
   const height = restingImpression(width);
-  const accent = cherryIndex(LAYOUT);
+  const accent = accentIndex(LAYOUT);
   const radius = spacing * PIN_RADIUS_RATIO;
   const strokes: Stroke[] = [];
 
@@ -52,7 +52,7 @@ function buildBed() {
     const z = row * spacing - half;
     const stems = new Map<number, string>();
     const tips = new Map<number, string>();
-    let cherry = "";
+    let accentStem = "";
     // On-screen pin width for this row.
     const [ax] = project(0, 0, z);
     const [bx] = project(radius * 2, 0, z);
@@ -66,7 +66,7 @@ function buildBed() {
       const stem = `M${fmt(px)} ${fmt(base)}L${fmt(tx)} ${fmt(tip)}`;
 
       if (row * size + col === accent) {
-        cherry = stem;
+        accentStem = stem;
         continue;
       }
       const light = Math.min(1, (0.55 + (row / (size - 1)) * 0.4) * pinShade(h));
@@ -81,7 +81,7 @@ function buildBed() {
     for (const [bucket, d] of tips) {
       strokes.push({ key: `${row}t${bucket}`, color: shade(bucket / (SHADES - 1)), d, width: strokeWidth });
     }
-    if (cherry) strokes.push({ key: `${row}c`, color: "#c1121f", d: cherry, width: strokeWidth });
+    if (accentStem) strokes.push({ key: `${row}c`, color: "#5b7fc7", d: accentStem, width: strokeWidth });
   }
 
   const edge = half + spacing * 1.6;

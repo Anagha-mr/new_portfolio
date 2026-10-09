@@ -115,7 +115,7 @@ export function MonitoringHero({ project, position }: MonitoringHeroProps) {
                     {pad(i + 1)}
                   </span>
                   <span className="absolute bottom-3 left-3.5 flex items-center gap-1.5 font-mono text-[0.6rem] uppercase tracking-[0.15em] text-stone/70 group-data-[active=true]:text-silver">
-                    <span className="size-1 rounded-full bg-stone/50 group-data-[active=true]:bg-cherry" />
+                    <span className="size-1 rounded-full bg-stone/50 group-data-[active=true]:bg-cobalt" />
                     <span className="group-data-[active=true]:hidden">Standby</span>
                     <span className="hidden group-data-[active=true]:inline">Polled</span>
                   </span>

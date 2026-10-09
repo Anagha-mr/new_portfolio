@@ -9,7 +9,7 @@ const INTERACTIVE =
 
 /**
  * Small dot that follows the native cursor (which stays visible) and opens into
- * a small cherry ring over links and buttons. Mouse only; skipped on coarse
+ * a small blue ring over links and buttons. Mouse only; skipped on coarse
  * pointers and under reduced motion. Position and state are written to the DOM
  * directly, so moving never re-renders React.
  */
@@ -80,7 +80,7 @@ export function Cursor() {
       data-pressed="false"
       className="group pointer-events-none fixed left-0 top-0 z-50 opacity-0 transition-opacity duration-[var(--duration-fast)] data-[visible=true]:opacity-100 data-[active=false]:mix-blend-difference"
     >
-      <span className="absolute size-5 -translate-x-1/2 -translate-y-1/2 scale-[0.3] rounded-full border border-ivory bg-ivory transition-[scale,background-color,border-color] duration-[var(--duration-fast)] ease-editorial group-data-[active=true]:scale-100 group-data-[active=true]:border-cherry group-data-[active=true]:bg-transparent group-data-[active=true]:group-data-[pressed=true]:scale-75" />
+      <span className="absolute size-5 -translate-x-1/2 -translate-y-1/2 scale-[0.3] rounded-full border border-ivory bg-ivory transition-[scale,background-color,border-color] duration-[var(--duration-fast)] ease-editorial group-data-[active=true]:scale-100 group-data-[active=true]:border-cobalt group-data-[active=true]:bg-transparent group-data-[active=true]:group-data-[pressed=true]:scale-75" />
     </div>
   );
 }

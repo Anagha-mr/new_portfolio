@@ -1,6 +1,6 @@
 /**
- * Deterministic PRNG (mulberry32) so procedural geometry (e.g. surface
- * jitter on the primary mass) is stable across renders instead of
+ * Deterministic PRNG (mulberry32) so procedural data (e.g. the hero's
+ * particle painting) is stable across renders instead of
  * re-randomizing on every remount.
  */
 export function createSeededRandom(seed: number): () => number {

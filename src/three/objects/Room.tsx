@@ -73,7 +73,7 @@ const SURFACES: Record<MaterialKey, { color: string; roughness?: number; emissiv
   floor: { color: "#1d1b18", roughness: 0.6 },
   wall: { color: "#34312c" },
   wallSide: { color: "#2a2723" },
-  rug: { color: "#850e17", roughness: 0.95 },
+  rug: { color: "#24365f", roughness: 0.95 },
   ceramic: { color: "#f1ede5", roughness: 0.55 },
   silver: { color: "#b5b1aa", roughness: 0.4 },
   shade: { color: "#f1ede5", emissive: "#f1ede5", emissiveIntensity: 0.55 },

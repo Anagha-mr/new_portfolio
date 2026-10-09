@@ -1,6 +1,6 @@
-# Anagha MR — The Red Thread
+# Anagha MR — Portfolio
 
-Personal portfolio of Anagha MR: a dark editorial site with a spatial WebGL hero and a red filament that runs through the pages.
+Personal portfolio of Anagha MR: a dark editorial site whose home hero is a Starry Night-inspired particle painting rendered in WebGL.
 
 ## Stack
 
@@ -35,8 +35,7 @@ src/
   components/   Layout, navigation, sections, UI primitives
   data/         Site, project (one file per project), experience, education and skills content
   hooks/        Shared client hooks
-  thread/       Page-level thread layers and scroll hand-off from the hero
-  three/        WebGL scenes, objects, materials and the 3D thread
+  three/        WebGL scenes, objects, materials and the hero particle painting
 ```
 
 Content lives in `src/data`, separate from the components that render it.
@@ -46,6 +45,8 @@ Content lives in `src/data`, separate from the components that render it.
 Each project with a page is a file in `src/data/projects/` (index fields plus a `detail` block). `/work/[slug]` renders the shared page structure in `src/components/projects/page/`; each project's `detail.visual` selects its hero and system diagram from `src/components/projects/worlds/`. Adding a project means adding a data file and, if it needs a new visual language, a world component.
 
 ## Notes
+
+- `context.md` is the authoritative design and implementation guide.
 
 - The 3D layer is an enhancement: the site remains fully usable without WebGL.
 - `prefers-reduced-motion` is respected throughout.

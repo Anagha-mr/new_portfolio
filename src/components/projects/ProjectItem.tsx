@@ -19,7 +19,7 @@ export function ProjectItem({ project, index }: ProjectItemProps) {
 
       <span
         className={`col-span-10 font-display text-3xl transition-colors duration-[var(--duration-fast)] sm:text-4xl md:col-span-7 md:text-5xl ${
-          linked ? "text-ivory group-hover:text-cherry group-focus-visible:text-cherry" : "text-stone"
+          linked ? "text-ivory group-hover:text-cobalt group-focus-visible:text-cobalt" : "text-stone"
         }`}
       >
         {project.title}
@@ -32,13 +32,23 @@ export function ProjectItem({ project, index }: ProjectItemProps) {
       <span className="col-span-4 mt-2 text-right font-mono text-xs uppercase tracking-[0.1em] text-silver md:col-span-1 md:mt-0">
         {project.year}
       </span>
+
+      {linked && (
+        // The whole row is already the link; this only labels it on hover / focus.
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute right-0 bottom-2 font-mono text-[10px] uppercase tracking-[0.2em] text-silver opacity-0 transition-opacity duration-[var(--duration-base)] group-hover:opacity-100 group-focus-visible:opacity-100 md:bottom-3"
+        >
+          View project →
+        </span>
+      )}
     </>
   );
 
   return (
     <li className="border-b border-stone/30">
       {linked ? (
-        <Link href={`/work/${project.slug}`} className={`group ${rowClass}`}>
+        <Link href={`/work/${project.slug}`} className={`group relative ${rowClass}`}>
           {content}
         </Link>
       ) : (
